@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Konsumsi Energi Cerdas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+            color: var(--text-dark);
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .card-glass {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+            padding: 3.5rem;
+            width: 100%;
+            max-width: 900px;
+            transition: transform 0.3s ease;
+        }
+
+        .card-glass:hover {
+            transform: translateY(-5px);
+        }
+
+        .page-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .form-floating>.form-control {
+            border: 2px solid transparent;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-left: 1.25rem;
+            padding-right: 3rem;
+        }
+
+        .form-floating>.form-control:focus {
+            background-color: var(--white);
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(143, 148, 251, 0.15);
+        }
+
+        .form-floating>label {
+            color: var(--text-light);
+            padding-left: 1.25rem;
+            font-weight: 400;
+        }
+
+        .btn-predict {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            color: var(--white);
+            font-weight: 600;
+            padding: 1.2rem;
+            border-radius: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(78, 84, 200, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-predict:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(78, 84, 200, 0.4);
+            color: var(--white);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+
+        .prediction-result {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-top: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 176, 155, 0.2);
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .prediction-result h3 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        .error-result {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-top: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(255, 65, 108, 0.2);
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .input-group-text {
+            background-color: transparent;
+            border: none;
+            color: var(--primary);
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .floating-icon-wrapper {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container d-flex justify-content-center">
+        <div class="card-glass">
+            <div class="text-center">
+                <div style="font-size: 3.5rem; color: var(--primary); margin-bottom: 1rem;">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h1 class="page-title">Sistem Prediksi Konsumsi Energi</h1>
+                <p class="page-subtitle">Masukkan data di bawah ini untuk memprediksi perkiraan konsumsi energi Anda
+                    secara cerdas menggunakan model Backpropagation.</p>
+            </div>
+
+            {% set feature_names_id = {
+            'Month': 'Bulan (1-12)',
+            'Hour': 'Jam (0-23)',
+            'DayOfWeek': 'Hari (0=Senin, 6=Minggu)',
+            'Holiday': 'Hari Libur (0=Tidak, 1=Ya)',
+            'Temperature': 'Suhu Lingkungan (°C)',
+            'Humidity': 'Kelembapan Udara (%)',
+            'SquareFootage': 'Luas Bangunan (sqft)',
+            'Occupancy': 'Jumlah Penghuni',
+            'HVACUsage': 'Penggunaan HVAC (Pendingin/Pemanas)',
+            'LightingUsage': 'Penggunaan Pencahayaan',
+            'RenewableEnergy': 'Energi Terbarukan (0=Tidak, 1=Ya)'
+            } %}
+
+            {% set feature_icons = {
+            'Month': 'fa-calendar-alt',
+            'Hour': 'fa-clock',
+            'DayOfWeek': 'fa-calendar-day',
+            'Holiday': 'fa-umbrella-beach',
+            'Temperature': 'fa-thermometer-half',
+            'Humidity': 'fa-tint',
+            'SquareFootage': 'fa-home',
+            'Occupancy': 'fa-users',
+            'HVACUsage': 'fa-fan',
+            'LightingUsage': 'fa-lightbulb',
+            'RenewableEnergy': 'fa-leaf'
+            } %}
+
+            <form action="/predict" method="post" class="needs-validation">
+                <div class="row g-4">
+                    {% if features %}
+                    {% for feature in features %}
+                    <div class="col-md-6">
+                        <div class="floating-icon-wrapper form-floating">
+                            <input type="number" step="any" class="form-control" name="{{ feature }}" id="{{ feature }}"
+                                placeholder="{{ feature_names_id.get(feature, feature) }}" required>
+                            <label for="{{ feature }}">{{ feature_names_id.get(feature, feature) }}</label>
+                            <span class="input-group-text"><i
+                                    class="fas {{ feature_icons.get(feature, 'fa-asterisk') }}"></i></span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="col-12 text-center">
+                        <div class="alert alert-danger rounded-4">
+                            <i class="fas fa-exclamation-triangle me-2"></i> Error: Fitur tidak ditemukan. Pastikan
+                            backend mengirim variabel 'features'.
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="mt-5">
+                    <button type="submit" class="btn btn-predict w-100 fs-5">
+                        <i class="fas fa-magic me-2"></i> Prediksi Sekarang
+                    </button>
+                </div>
+            </form>
+
+            {% if prediction_text %}
+            {% if 'Error' in prediction_text %}
+            <div class="error-result">
+                <i class="fas fa-times-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <h4>Terjadi Kesalahan</h4>
+                <p class="mb-0">{{ prediction_text|replace('Error: ', '') }}</p>
+            </div>
+            {% else %}
+            <div class="prediction-result">
+                <i class="fas fa-check-circle"
+                    style="font-size: 3rem; margin-bottom: 1rem; color: rgba(255,255,255,0.9);"></i>
+                <p class="mb-1" style="font-size: 1.1rem; opacity: 0.9;">Hasil Prediksi Konsumsi Energi Anda</p>
+                <h3>{{ prediction_text|replace('Hasil Prediksi Konsumsi Energi: ', '') }} kWh</h3>
+            </div>
+            {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
